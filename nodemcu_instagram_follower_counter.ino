@@ -7,14 +7,14 @@
 
 
 //-----------SETTINGS-------------
-const char* SSID = "ASUS";            // wifi SSID name
-const char* PASSWORD = "D@m1945Year"; // wifi PASSWORD
+#define SSID "<SSID>";                      // wifi SSID name
+#define PASSWORD "<PASS>";                   // wifi PASSWORD
+#define INSTAGRAM_PROXY_API "<INSERT URL HERE>" // your instgram proxy api endpoint used for retrieving data from fucking https instagram api to your app
 
 #define MAX_FOLLOWER  1000                      // the amount of follower per hour when LED became a red
 #define BTN_SWITCH_SCREEN_PIN  12               // PIN number for switch screen button
 #define MAX_SCREEN_NUMBER  3                    // max amount of screen (actually start from 0)
 #define LED_PIN 13                              // PIN number for led strip which used for represent total followers income per day
-#define INSTAGRAM_PROXY_API "<INSERT URL HERE>" // your instgram proxy api endpoint used for retrieving data from fucking https instagram api to your app
 
 // Parameter 1 = number of pixels in strip
 // Parameter 2 = pin number (most are valid)
@@ -34,14 +34,13 @@ byte activeScreen = 3;
 byte oldScreen = -1;
 
 // The next 5 values retrieved from instagram proxy API
-String dailyFollowerIncome;           // total follower income per day
+String dailyFollowerIncome; // total follower income per day
 String lastPostDate;        // last post date
 String lastPostLikes;       // last post like amount
 String lastPostComments;    // last post comments amount
 String currentTime;         // current time in string format
 
 float  roomCelsius;         // temperature retrieved from DS18S20
-
 unsigned long min_step = 1;    // pause between instagramm api requests in minutes
 
 int color;
@@ -77,9 +76,6 @@ void setup() {
   ESP.wdtEnable(WDTO_8S);
 
   Serial.begin(9600);
-  // настраиваем пин №13 в режим выхода,
-  // т.е. в режим источника напряжения
-  //pinMode(13, OUTPUT);
   pinMode(BTN_SWITCH_SCREEN_PIN, INPUT);
   lcd.setCursor(0, 0);
   lcd.print("Loading..."); // Start Print text to Line 1
